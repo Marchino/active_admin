@@ -24,22 +24,6 @@ module ActiveAdmin
       def column_for(method)
         @object.base.columns_hash[method.to_s] if @object.base.respond_to?(:columns_hash)
       end
-
-      #
-      # The below are custom methods that Formtastic does not provide.
-      #
-
-      def foreign_key?(method)
-        @object.base.reflections.select{ |_,r| r.macro == :belongs_to }.values
-          .map(&:foreign_key).include? method.to_s
-      end
-
-      def polymorphic_foreign_type?(method)
-        type = Rails::VERSION::MAJOR == 3 && Rails::VERSION::MINOR == 0 ? proc{ |r| r.options[:foreign_type] } : :foreign_type
-        @object.base.reflections.values.select{ |r| r.macro == :belongs_to && r.options[:polymorphic] }
-          .map(&type).include? method.to_s
-      end
-
     end
   end
 end
