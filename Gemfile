@@ -8,7 +8,6 @@ require File.expand_path('spec/support/detect_rails_version', ACTIVE_ADMIN_PATH)
 
 rails_version = detect_rails_version
 gem 'rails', rails_version
-gem 'bourbon'
 
 group :assets do
   gem 'sass-rails'
